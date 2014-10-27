@@ -34,7 +34,7 @@
   NSMutableDictionary *keychainQuery = [self getKeychainQuery:key];
   // delete any previous value with this key
   OSStatus deleteStatus = SecItemDelete((__bridge CFDictionaryRef)keychainQuery);
-  if (deleteStatus != noErr) {
+  if (deleteStatus != noErr && deleteStatus != errSecItemNotFound) {
     value = [NSString stringWithFormat:@"Error deleting value: %d", (int)deleteStatus];
 		return value;
 	}
